@@ -1,0 +1,26 @@
+# ==============================================================================
+# Render.com Blueprint Configuration for DOTMIND 24/7 Always-On Personal AI Agent
+# ==============================================================================
+services:
+  - type: web
+    name: dotmind-agent
+    env: docker
+    plan: free
+    region: oregon
+    dockerfilePath: Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: ENVIRONMENT
+        value: production
+      - key: WORKSPACE_ROOT
+        value: /app
+      - key: DOTMIND_USE_GENAI_SERVICE
+        value: "true"
+      - key: GENAI_SERVICE_URL
+        value: http://127.0.0.1:8001
+      - key: GEMINI_MODEL
+        value: gemini-2.5-flash
+      - key: GEMINI_API_KEY
+        sync: false
