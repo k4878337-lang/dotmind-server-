@@ -30,8 +30,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # 2. Install Node.js dependencies for GenAI microservice
-COPY genai-service/package.json genai-service/pnpm-lock.yaml* /app/genai-service/
-RUN cd /app/genai-service && (pnpm install --prod || npm install --production)
+COPY genai-service/package.json /app/genai-service/
+RUN cd /app/genai-service && (pnpm install --prod --no-frozen-lockfile || (rm -rf node_modules && npm install --omit=dev --legacy-peer-deps --no-audit --no-fund))
 
 # 3. Install Python dependencies
 COPY backend/requirements.txt /app/backend/

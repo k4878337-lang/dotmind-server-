@@ -13,7 +13,7 @@ echo "  Target Port: ${APP_PORT}"
 echo "=================================================================="
 
 # 1. Start official @google/genai Node.js SDK service in the background
-if [ -d "/app/genai-service" ] && [ -f "/app/genai-service/server.js" ]; then
+if [ -d "/app/genai-service" ] && [ -f "/app/genai-service/server.js" ] && [ -d "/app/genai-service/node_modules" ]; then
     echo "  🚀 Starting @google/genai SDK Service on http://127.0.0.1:8001..."
     (cd /app/genai-service && node server.js) &
     GENAI_PID=$!
